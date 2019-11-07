@@ -3,14 +3,10 @@ import Burger from "../../components/Burger/Burger";
 import BuildControls from "../../components/Burger/BuildControls/BuildControls";
 import Modal from "../../components/UI/Modal/Modal";
 import OderSummary from "../../components/Burger/OderSummary/OderSummary";
-import axiosInstance from "../../axios-orders";
 import Spinner from "../../components/UI/Spinner/Spinner";
-import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
 import Auxiliary from "../../hoc/Auxiliary/Auxiliary";
-import * as actionTypes from '../../store/actions/actionTypes';
 import {connect} from "react-redux";
 import * as actions from "../../store/actions/index";
-
 
 
 class BurgerBuilder extends Component {
@@ -54,7 +50,7 @@ class BurgerBuilder extends Component {
             queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.props.ings[i]))
         }
         queryParams.push('totalPrice=' + this.props.totalPrice)
-        let queryString = queryParams.join('&');
+        // let queryString = queryParams.join('&');
         this.props.onPurchageInit();
         this.props.history.push(
             {

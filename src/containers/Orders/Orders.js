@@ -1,11 +1,9 @@
 import React, {Component} from 'react';
-import classes from './Orders.css';
 import Order from "../../components/Order/Order";
-import axiosInstance from "../../axios-orders";
-import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
 import * as actions from '../../store/actions/index'
 import {connect} from "react-redux";
 import Spinner from "../../components/UI/Spinner/Spinner";
+
 class Orders extends Component {
 
     state = {

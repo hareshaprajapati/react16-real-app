@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import classes from './OderSummary.css';
 import Auxiliary from "../../../hoc/Auxiliary/Auxiliary";
 import Button from "../../UI/Button/Button";
 

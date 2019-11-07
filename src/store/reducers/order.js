@@ -1,5 +1,5 @@
 import * as actionTypes from '../actions/actionTypes';
-import {updatedObject} from "../utility";
+import {updatedObject} from "../../shared/utility";
 
 const initialState = {
     orders: [],
@@ -43,7 +43,6 @@ const orderReducer = (state = initialState, action) => {
         default:
             return {...state};
     }
-    return {...state};
 }
 
 export default orderReducer;

@@ -1,13 +1,12 @@
 import React, {Component} from 'react';
 import classes from './ContactData.css';
 import Button from "../../components/UI/Button/Button";
-import axiosInstance from "../../axios-orders";
 import Spinner from "../../components/UI/Spinner/Spinner";
 import Input from "../../components/UI/Input/Input";
 import {connect} from "react-redux";
-import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
 
 import * as orderActions from '../../store/actions/index'
+import {checkValidity, updatedObject} from "../../shared/utility";
 
 class ContactData extends Component {
     state = {
@@ -157,13 +156,17 @@ class ContactData extends Component {
     }
 
     inputChangeHandler(event, key) {
-        const updatedForm = {...this.state.orderForm}
-        const updatedFormElement = {...updatedForm[key]}
-        updatedFormElement.value = event.target.value;
-        updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation);
-        updatedFormElement.isTouched = true;
-        console.log(updatedFormElement)
-        updatedForm[key] = updatedFormElement;
+        const updatedFormElement = updatedObject(this.state.orderForm[key],
+            {
+                value : event.target.value,
+                valid : checkValidity(event.target.value, this.state.orderForm[key].validation),
+                isTouched : true
+            }
+            )
+        const updatedForm = updatedObject(this.state.orderForm,
+            {
+                [key]: updatedFormElement
+            });
         let formIsValid = true;
         for (let e in updatedForm) {
             if (!updatedForm[e].valid && updatedForm[e].validation) {
@@ -174,36 +177,6 @@ class ContactData extends Component {
         this.setState({orderForm: updatedForm, formIsValid: formIsValid})
     }
 
-    checkValidity(value, rules) {
-        let isValid = true;
-        if (!rules) {
-            return true;
-        }
-
-        if (rules.required) {
-            isValid = value.trim() !== '' && isValid;
-        }
-
-        if (rules.minLength) {
-            isValid = value.length >= rules.minLength && isValid
-        }
-
-        if (rules.maxLength) {
-            isValid = value.length <= rules.maxLength && isValid
-        }
-
-        if (rules.isEmail) {
-            const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-            isValid = pattern.test(value) && isValid
-        }
-
-        if (rules.isNumeric) {
-            const pattern = /^\d+$/;
-            isValid = pattern.test(value) && isValid
-        }
-
-        return isValid;
-    }
 }
 
 

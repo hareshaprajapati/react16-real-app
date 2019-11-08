@@ -32,6 +32,7 @@ class Checkout extends Component {
         console.log(this.props.match.path);
         let summary = (<Redirect to='/'/>);
         if(this.props.ings){
+            // if purchasing if finished then redirect it to home page
             const redirect = this.props.purchaged ? <Redirect to='/'/> : null;
             summary = (<div>
                 {redirect}

@@ -61,11 +61,11 @@ export const fetchOrderStart = () => {
 export const fetchOrders = (token, userId) => {
     return dispatch => {
         dispatch(fetchOrderStart());
+        // fetch bu userId  firebase trick
         let query = '?auth=' + token + '&orderBy="userId"&equalTo="' +userId + '"';
         axiosInstance.get('/orders.json' + query).then(res => {
             console.log(res)
             const fetchData = [];
-
             for(let key in res.data){
                 fetchData.push(
                     {

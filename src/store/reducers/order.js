@@ -7,6 +7,9 @@ const initialState = {
     purchaged: false
 }
 
+
+// update the state by action which will have all the required information to be updated and return the state
+
 const orderReducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.PURCHAGE_INIT: {

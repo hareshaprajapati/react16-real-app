@@ -27,7 +27,6 @@ class BurgerBuilder extends Component {
                 return curSum + el;
             }, 0);
         return sum > 0;
-
     }
 
     purchaseHandler = () => {
@@ -44,7 +43,6 @@ class BurgerBuilder extends Component {
     }
 
     purchaseContinueHandler = () => {
-        console.log(this.props);
         let queryParams = [];
         for(let i in this.props.ings){
             queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.props.ings[i]))
@@ -52,17 +50,16 @@ class BurgerBuilder extends Component {
         queryParams.push('totalPrice=' + this.props.totalPrice)
         // let queryString = queryParams.join('&');
         this.props.onPurchageInit();
+        // goto checkout route
         this.props.history.push(
             {
                 pathname: '/checkout',
                 // search: queryString
             }
             );
-
-    }
+    };
 
     componentDidMount() {
-        console.log(this.props)
         // axiosInstance.get('https://burgerapp-daae8.firebaseio.com/ingredients.json').then(
         //     response => {
         //         this.setState({
@@ -74,7 +71,6 @@ class BurgerBuilder extends Component {
     }
 
     render() {
-        console.log(this.props)
         const disabledInfo = {...this.props.ings};
         for (let key in disabledInfo) {
             disabledInfo[key] = disabledInfo[key] <= 0;
@@ -107,9 +103,7 @@ class BurgerBuilder extends Component {
             ></OderSummary>;
         }
 
-        if (this.state.loading) {
-            orderSummary = <Spinner/>
-        }
+
         return (
             <React.Fragment>
                 <Modal show={this.state.isPurchasing} backdropClicked={this.purchaseCancelHandler}>

@@ -40,7 +40,7 @@ class Auth extends Component {
                 isTouched: false
             }
         },
-        isSignUp: true
+        isSignUp: false
     }
 
 
@@ -60,6 +60,7 @@ class Auth extends Component {
 
     submitHanler = (event) => {
         event.preventDefault();
+        // handle login or signup
         this.props.onAuth(this.state.controls.email.value,this.state.controls.password.value, this.state.isSignUp);
 
     }
@@ -71,6 +72,7 @@ class Auth extends Component {
     }
 
     componentDidMount (){
+        // resetting the auth redirect path if user is not building the burger
         if(!this.props.buildingBurger && this.props.authRedirectPath !== '/'){
             this.props.onSetAuthRedirectPath();
         }
@@ -104,9 +106,9 @@ class Auth extends Component {
         }
         let redirectToHome = null;
         if(this.props.isAuthenticated){
+            // while purchansing the order if user is redirected to Auth page to signup then after login user needs to be continue with the purchasing the order so we are redirecting it to the checkout page which is set dynamically
             redirectToHome  = <Redirect to={this.props.authRedirectPath} />
         }
-
         return (
             <div className={classes.Auth}>
                 {redirectToHome}

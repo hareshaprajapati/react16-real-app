@@ -32,6 +32,7 @@ export const logout = () => {
     }
 }
 
+// wait for expirytime and then logout the user automaticaly after timeout
 export const checkAuthLogout = (expiresIn) => {
     return dispatch => {
         setTimeout(() => {
@@ -52,6 +53,7 @@ export const auth = (email,password,  isSignup) => {
         if(!isSignup){
             url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyC-oOYK1_r4WKdjqpVonLC6tJikk5urZhg';
         }
+        // axios to send http call
         axios.post(url, authData)
             .then(response => {
                 console.log(response);
@@ -59,7 +61,7 @@ export const auth = (email,password,  isSignup) => {
                 localStorage.setItem('token', response.data.idToken);
                 localStorage.setItem('userId', response.data.localId);
                 localStorage.setItem('expirationTime', date);
-                dispatch(authSucess(response.data.idToken, date));
+                dispatch(authSucess(response.data.idToken, response.data.localId));
                 dispatch(checkAuthLogout(response.data.expiresIn));
             })
             .catch(error => {
@@ -78,6 +80,7 @@ export const setAuthRedirectPath = (path) => {
     }
 }
 
+// check if token and expirationTime is fine then use them and authenticate user otherwise logout them
 export const authCheckState = () => {
     return dispatch => {
         const token = localStorage.getItem('token');

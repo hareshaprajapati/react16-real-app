@@ -40,6 +40,8 @@ const setAuthRedirectPath = (state, action) => {
         })
 }
 
+// update the state by action which will have all the required information to be updated and return the state
+
 const reducer = (state = initialState, action) => {
     switch (action.type){
         case actionTypes.AUTH_START: return authStart(state,action);

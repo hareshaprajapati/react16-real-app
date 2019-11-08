@@ -28,6 +28,7 @@ class Layout extends Component {
                     isAuthenticated={this.props.isAuthenticated}
                     open={this.state.showSidebar} closed={this.sideDrawerActionHandler}/>
                 <main className={classes.Content}>
+                    {/*html content will be placed here which are passed in <Layout> </Layout>*/}
                     {this.props.children}
                 </main>
             </Aux>

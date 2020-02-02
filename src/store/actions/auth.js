@@ -7,7 +7,7 @@ export const authStart = () => {
     }
 }
 
-export const authSucess = (idToken,userId) => {
+export const authSucess = (idToken, userId) => {
     return {
         type: actionTypes.AUTH_SUCESS,
         idToken: idToken,
@@ -24,9 +24,22 @@ export const authFail = (error) => {
 }
 
 export const logout = () => {
+    return {
+        type: actionTypes.AUTH_INITIATE_LOGOUT
+    }
+
+    /* 
+    // redux-thunk
     localStorage.removeItem('token');
     localStorage.removeItem('userId');
     localStorage.removeItem('expirationTime');
+    return {
+         type: actionTypes.AUTH_LOGOUT
+    }
+    */
+}
+
+export const logoutSucced = () => {
     return {
         type: actionTypes.AUTH_LOGOUT
     }
@@ -34,14 +47,32 @@ export const logout = () => {
 
 // wait for expirytime and then logout the user automaticaly after timeout
 export const checkAuthLogout = (expiresIn) => {
-    return dispatch => {
+    console.log(expiresIn);
+    return {
+        type: actionTypes.CHECK_AUTH_LOGOUT,
+        expiresIn: expiresIn
+    }
+    /*
+    // redux-thunk
+
+     return dispatch => {
         setTimeout(() => {
             dispatch(logout())
         }, expiresIn  * 1000)
     }
+    */
 }
 
-export const auth = (email,password,  isSignup) => {
+export const auth = (email, password, isSignup) => {
+    return {
+        type: actionTypes.AUTH_USER,
+        email,
+        password,
+        isSignup
+    }
+
+    /* 
+    // redux-thunk
     return dispatch => {
         dispatch(authStart());
         const authData = {
@@ -68,9 +99,8 @@ export const auth = (email,password,  isSignup) => {
                 console.log(error)
                 dispatch(authFail(error.response.data.error.message))
             })
-
-
     }
+    */
 }
 
 export const setAuthRedirectPath = (path) => {
@@ -82,7 +112,14 @@ export const setAuthRedirectPath = (path) => {
 
 // check if token and expirationTime is fine then use them and authenticate user otherwise logout them
 export const authCheckState = () => {
-    return dispatch => {
+    return {
+        type: actionTypes.AUTH_CHECK_STATE
+    }
+
+    /* 
+    // redux-thunk
+
+     return dispatch => {
         const token = localStorage.getItem('token');
         if(!token){
             dispatch(logout())
@@ -97,4 +134,5 @@ export const authCheckState = () => {
             }
         }
     }
+    */
 }

@@ -28,6 +28,13 @@ export const purchageInit = () => {
 }
 
 export const purchageBurger = (orderData, token) => {
+    return {
+        type: actionTypes.PURCHAGE_BURGER,
+        orderData: orderData,
+        token: token
+    }
+    /* 
+    // thunk
     return dispatch => {
         dispatch(purchageBurgerStart());
         axiosInstance.post('/orders.json?auth=' + token, orderData).then(response => {
@@ -35,7 +42,7 @@ export const purchageBurger = (orderData, token) => {
         }).catch(error => {
             dispatch(purchageOrderFailed(error))
         });
-    }
+    } */
 }
 
 export const fetchOrderSuccess = (orders) => {

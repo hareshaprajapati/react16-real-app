@@ -63,10 +63,17 @@ const mapStateToProps = state => {
     };
 }
 
+const mapDispatchToProps =  
+      {
+        onPurchageInit: () =>  actions.purchageInit()
+    }
+
+/* 
+// redux thunk
 const mapDispatchToProps = dispatch => {
     return {
         onPurchageInit: () => dispatch(actions.purchageInit())
     }
-}
+} */
 
 export default connect(mapStateToProps, mapDispatchToProps)(Checkout);

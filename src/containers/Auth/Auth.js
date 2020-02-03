@@ -134,11 +134,18 @@ const mapStateToProps = state => {
     }
 }
 
+const mapDispatchToProps = 
+    {
+        onAuth : (email,password,isSignup) =>  actions.auth(email,password,isSignup) ,
+        onSetAuthRedirectPath: () =>  actions.setAuthRedirectPath('/') 
+    }
+/* 
+// redux thunk
 const mapDispatchToProps = dispatch => {
     return {
         onAuth : (email,password,isSignup) => dispatch(actions.auth(email,password,isSignup)),
         onSetAuthRedirectPath: () => dispatch(actions.setAuthRedirectPath('/'))
     }
-}
+} */
 
 export default connect(mapStateToProps, mapDispatchToProps)(Auth);

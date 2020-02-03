@@ -21,6 +21,8 @@ export function* checkAuthLogoutSaga(action) {
 
 
 export function* authUserSaga(action) {
+    console.log(action);
+    
     yield put(actions.authStart());
     const authData = {
         email: action.email,

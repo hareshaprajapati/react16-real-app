@@ -66,6 +66,13 @@ export const fetchOrderStart = () => {
 }
 
 export const fetchOrders = (token, userId) => {
+    return {
+        type: actionTypes.FETCH_ORDERS,
+        token,
+        userId
+    }
+    /* 
+    // thunk
     return dispatch => {
         dispatch(fetchOrderStart());
         // fetch bu userId  firebase trick
@@ -81,5 +88,5 @@ export const fetchOrders = (token, userId) => {
             }
            dispatch(fetchOrderSuccess(fetchData));
         }).catch(e => dispatch(fetchOrderFailed(e)))
-    }
+    } */
 }

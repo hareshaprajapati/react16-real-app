@@ -123,7 +123,17 @@ const mapStateToProps = state => {
         isAuthenticated: state.auth.token !== null
     };
 }
+const mapDispatchToProps = 
+{
+    onIngredientAdded: (ingName) =>  actions.addIngredients(ingName) ,
+    onIngredientRemoved: (ingName) =>  actions.removeIngredients(ingName),
+    onInitIngredients: () =>  actions.initIngredients(),
+    onPurchageInit: () =>  actions.purchageInit(),
+    onSetAuthRedirectPath: (path) =>  actions.setAuthRedirectPath(path)
+}
 
+/* 
+// redux thunk
 const mapDispatchToProps = dispatch => {
     return {
         onIngredientAdded: (ingName) => dispatch(actions.addIngredients(ingName)),
@@ -132,7 +142,7 @@ const mapDispatchToProps = dispatch => {
         onPurchageInit: () => dispatch(actions.purchageInit()),
         onSetAuthRedirectPath: (path) => dispatch(actions.setAuthRedirectPath(path))
     }
-}
+} */
 
 export default connect(mapStateToProps, mapDispatchToProps)(BurgerBuilder);
 // export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler( BurgerBuilder, axiosInstance ));

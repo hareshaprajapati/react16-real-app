@@ -9,7 +9,7 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import burgerBuilderReducer from './store/reducers/burgerBuilder';
-import reduxThunk from "redux-thunk";
+// import reduxThunk from "redux-thunk";
 import orderReducer from "./store/reducers/order";
 import authReducer from "./store/reducers/auth";
 import { watchAuth, watchBurerBuilder, watchOrder } from './store/sagas/index';
@@ -28,7 +28,7 @@ const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX
 const sagaMiddleware = createSagaMiddleware();
 
 // reduxThunk : used to handle asynchronous actions in Redux
-const store = createStore(rootReducer, composeEnhancers(applyMiddleware(reduxThunk, sagaMiddleware)));
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(/* reduxThunk, */ sagaMiddleware)));
 // const store = createStore(burgerBuilderReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 sagaMiddleware.run(watchAuth);

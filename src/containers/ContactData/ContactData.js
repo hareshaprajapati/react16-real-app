@@ -189,11 +189,18 @@ const mapStateToProps = state => {
     };
 }
 
+const mapDispatchToProps =  
+      {
+        onPurchageBurger: (orderData, token) =>  orderActions.purchageBurger(orderData, token)
+    }
+
+/* 
+// redux thunk
 const mapDispatchToProps = dispatch => {
     return {
         onPurchageBurger: (orderData, token) => dispatch(orderActions.purchageBurger(orderData, token))
     }
-};
+}; */
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContactData);
 // export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(ContactData, axiosInstance));
